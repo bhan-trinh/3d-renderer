@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <iomanip>
 #include "framebuffer.h"
 
 #define WIDTH 680
@@ -18,7 +19,7 @@ int main(){
         return -1;
     }
 
-    // Create and set up my silly window
+    // Creates and set up my silly window
     SDL_Window *window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
 
@@ -28,13 +29,13 @@ int main(){
         return -1;
     }
 
-    // Create my silly renderer
+    // Creates my silly renderer
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    // Create my silly texture
+    // Creates my silly texture
     SDL_Texture *framebuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
-    // Create my silly pixels
+    // Creates my silly pixels
     Framebuffer fb(WIDTH, HEIGHT);
 
     bool keepWindowOpen = true;
@@ -50,17 +51,31 @@ int main(){
                 case SDL_QUIT:
                     keepWindowOpen = false;
                     break;
+                
+                case SDL_KEYDOWN:
+                    // Optional: handle keyboard shortcuts within the application window
+                    if (e.key.keysym.sym == SDLK_ESCAPE) {
+                        keepWindowOpen = false;
+                    }
+                    break;
             }
+            
 
-            // Draw sily changes on framebuffer
-            fb.clear(GREEN);
+            // Draws sily changes on framebuffer
+            fb.clear(0xFF000000);
+
+
+            //  std::cout << "Hexadecimal (formatted): 0x" 
+            //   << std::uppercase << std::setfill('0') << std::setw(8) 
+            //   << fb.getPixels()[(HEIGHT - 1) * WIDTH + (WIDTH - 1)] << std::endl;
+
             
             // Difference between updateSurface? Whats the WIDTH for?
 
-            // Update silly framebuffer
+            // Updates silly framebuffer
             SDL_UpdateTexture(framebuffer, NULL, fb.getPixels(), WIDTH * sizeof(uint32_t));
 
-            // Render from silly buffer to screen
+            // Renders from silly buffer to screen
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
             SDL_RenderPresent(renderer);
@@ -75,3 +90,4 @@ int main(){
 
     return 0;
 }
+

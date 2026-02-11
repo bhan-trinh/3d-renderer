@@ -12,7 +12,9 @@ class Framebuffer {
         Framebuffer(int w, int h);
         uint32_t* getPixels();
         void putPixel(int x, int y, uint32_t color);
+        void drawLine(int x0, int y0, int x1, int y1, uint32_t color);
         void clear(uint32_t color);
+        void printPixels();
 };
 
 #endif
