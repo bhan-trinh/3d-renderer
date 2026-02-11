@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = `sdl2-config --cflags --libs`
 
 TARGET = sdl2-program
-SRC = openWindow.cpp
+SRC = openWindow.cpp framebuffer.cpp
 
 all: $(TARGET)
 
