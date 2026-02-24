@@ -22,6 +22,17 @@ void Framebuffer::drawLine(int x0, int y0, int x1, int y1, uint32_t color){
     putPixel(x0, y0, color ^ 0x00FFFFFF);
     putPixel(x1, y1, color ^ 0x00FFFFFF);
 
+    // Swap if start > end
+    if (x0 > x1){
+        int temp = x0;
+        x0 = x1;
+        x1 = temp;
+
+        temp = y0;
+        y0 = y1;
+        y1 = temp;
+    }
+
     dx = x1 - x0;
     dy = y1 - y0;
 

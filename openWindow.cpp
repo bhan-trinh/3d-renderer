@@ -64,7 +64,7 @@ int main(){
             // Draws sily changes on framebuffer
             fb.clear(0xFF000000);
 
-
+            fb.drawLine(50, 50, 1, 1, RED);
             //  std::cout << "Hexadecimal (formatted): 0x" 
             //   << std::uppercase << std::setfill('0') << std::setw(8) 
             //   << fb.getPixels()[(HEIGHT - 1) * WIDTH + (WIDTH - 1)] << std::endl;
